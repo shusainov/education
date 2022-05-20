@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="UserInterface">
+    <test name="Registration">
+        <classes>
+            <class name="tests.userinterface.RegistrationTest"/>
+        </classes>
+    </test>
+    <test name="HideHelp">
+        <classes>
+            <class name="tests.userinterface.HideHelpTest"/>
+        </classes>
+    </test>
+    <test name="CookieAccept">
+        <classes>
+            <class name="tests.userinterface.CookieAcceptTest"/>
+        </classes>
+    </test>
+    <test name="CheckTimer">
+        <classes>
+            <class name="tests.userinterface.CheckTimerTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mytest
+spec:
+  containers:
+    - name: mytest
+      image: 192.168.0.109:5000/mytest
+      volumeMounts:
+        - name: allure1
+          mountPath: /tmp/allure-results
+  restartPolicy: Never
+  volumes:
+    - name: allure1
+      persistentVolumeClaim:
+        claimName: allure

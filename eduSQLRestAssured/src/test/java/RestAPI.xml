@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="RestAPI">
+    <test name="Post99">
+        <classes>
+            <class name="tests.Post99Test"/>
+        </classes>
+    </test>
+    <test name="Post150">
+        <classes>
+            <class name="tests.Post150Test"/>
+        </classes>
+    </test>
+    <test name="POSTPost">
+        <classes>
+            <class name="tests.POSTPostTest"/>
+        </classes>
+    </test>
+    <test name="PostsAscending">
+        <classes>
+            <class name="tests.PostsAscendingTest"/>
+        </classes>
+    </test>
+    <test name="User5">
+        <classes>
+            <class name="tests.User5Test"/>
+        </classes>
+    </test>
+    <test name="Users">
+        <classes>
+            <class name="tests.UsersTest"/>
+        </classes>
+    </test>
+</suite>

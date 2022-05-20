@@ -1,0 +1,7 @@
+/.idea/
+/SecondEx.iml
+/target
+/allure-results/
+/.allure/
+/mylogfile.log
+/test.log

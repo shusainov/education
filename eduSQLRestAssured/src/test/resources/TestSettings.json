@@ -1,0 +1,14 @@
+{
+  "URL": "https://userinyerface.com/game.html%20target=",
+  "AvatarFilePath": "src/test/resources/avatar.png",
+  "zeroTime": "00:00:00",
+  "author": {
+    "name": "Salavat",
+    "login": "skhusainov",
+    "email": "shusainov3@gmail.com"
+  },
+  "project": {
+    "name": "UserInterface"
+  },
+  "env": "localhost"
+}

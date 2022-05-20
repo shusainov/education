@@ -1,0 +1,7 @@
+{
+  "URL": "https://vk.com/",
+  "API_URL": "https://api.vk.com/method/",
+  "AttachPhoto": "src/test/resources/ejik.jpg",
+  "TempFile": "src/test/temp.tmp",
+  "VkApiVersion": "5.131"
+}

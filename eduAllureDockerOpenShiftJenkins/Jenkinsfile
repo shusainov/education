@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git') {
+            steps{
+                git 'https://github.com/shusainov/SecondEx'
+            }
+        }
+        stage('prepare docker image'){
+            steps{
+                sh 'docker build baseImage -t mytestbi'
+                sh 'docker build . --no-cache -t 192.168.0.109:5000/mytest'
+                sh 'docker push 192.168.0.109:5000/mytest'
+                sleep(10)
+            }
+        }
+        stage('start image'){
+            steps{
+                sh 'oc login https://192.168.0.10:8443 --token=V6I_ySYsjXNOA3QJXsDJxmFScwOqq1XIOvRS-U-z6vs'
+                sh 'kubectl apply -f mytest.yaml'
+                sleep(10)
+            }
+        }
+        stage('wait execution'){
+            steps{
+                script {
+                    def status = ''
+                    while((status!='Failed')||(status!='Succeeded')) {
+                        status = sh (script: 'oc get pods mytest -o custom-columns=POD:status.phase --no-headers',returnStdout: true).trim()
+                        echo "$status"
+                        sleep(5)
+                    }
+                }
+            }
+        }
+    }
+
+    post(){
+        always{
+            //сохранить логи
+            sh 'oc logs -f mytest > log.txt'
+            archiveArtifacts artifacts: 'log.txt', fingerprint: true
+
+            // Удаление основного контейнера
+            sh 'kubectl delete -f mytest.yaml'
+
+            //отчёты Allure
+            sh 'kubectl apply -f allure.yaml'
+            sleep(10)
+            sh 'kubectl cp mytest-allure:tmp/allure-results allure-results'
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            sh 'kubectl delete -f allure.yaml'
+            sleep(5)
+
+            //Почистить старые отчёты
+            sh 'kubectl apply -f allure-removeFiles.yaml'
+            sleep(10)
+            sh 'kubectl delete -f allure-removeFiles.yaml'
+        }
+    }
+}
